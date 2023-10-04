@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const[task,setTask] =useState('');
+  const [input,setInput]=useState([]);
+  function Submit(){
+    setInput([...input,task]);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>To-Do Application</h1>
+      <input type='text' placeholder='enter task!!' value={task} onChange={(e)=>setTask(e.target.value)}/>
+      <button onClick={Submit}>Add</button>
+      {
+        input && input.map(item=>{
+          return(
+            <div>{item}</div>
+          )
+        })
+      }
     </div>
   );
 }
